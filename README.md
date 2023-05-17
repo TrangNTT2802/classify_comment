@@ -1,4 +1,3 @@
-Giải pháp của mình tập trung vào data hơn mô hình. Với bài toán này, mình tập trung tiền xử lý dữ liệu, loại bỏ nhiễu, gán nhãn lại các mislabel data. Lý do tập trung vào data hơn vì mình quan sát dữ liệu thấy có khá nhiều nhiễu, gán nhãn sai và lấy từ các trang thương mại điện tử nên từ ngữ lộn xộn, thường không theo văn phong chuẩn mực, cần phải có bước chuẩn hóa. Mô hình mình sử dụng là SVM và feature quen thuộc TF-IDF (5-gram). Lý do sử dụng SVM vì mình thấy SVM khá phù hợp với các bài toán có ít dữ liệu nhưng nhiều features. Mô hình này vẫn cho kết quả khá tốt, thời gian train/predict khá nhanh (train dưới 1 phút với macbook 2015 của mình). Cuối cùng là giải thích về việc dùng Error Analysis để gán lại các Mislabel data.
 <h1>Chi tiết cách thực hiện:</h1>
 <h2>1. Tiền xử lý dữ liệu:</h2>
 <ul>
