@@ -1,6 +1,3 @@
-Chào mọi người! Mình chia sẻ ngắn gọn trong bài này giải pháp của mình trong cuộc thi phân loại sắc thái bình luận tại AIVIVN.COM.
-https://forum.machinelearningcoban.com/t/chia-se-model-sentiment-analysis-aivivn-com-top-5/4537
-<h1>Sơ lược giải pháp:</h1>
 Giải pháp của mình tập trung vào data hơn mô hình. Với bài toán này, mình tập trung tiền xử lý dữ liệu, loại bỏ nhiễu, gán nhãn lại các mislabel data. Lý do tập trung vào data hơn vì mình quan sát dữ liệu thấy có khá nhiều nhiễu, gán nhãn sai và lấy từ các trang thương mại điện tử nên từ ngữ lộn xộn, thường không theo văn phong chuẩn mực, cần phải có bước chuẩn hóa. Mô hình mình sử dụng là SVM và feature quen thuộc TF-IDF (5-gram). Lý do sử dụng SVM vì mình thấy SVM khá phù hợp với các bài toán có ít dữ liệu nhưng nhiều features. Mô hình này vẫn cho kết quả khá tốt, thời gian train/predict khá nhanh (train dưới 1 phút với macbook 2015 của mình). Cuối cùng là giải thích về việc dùng Error Analysis để gán lại các Mislabel data.
 <h1>Chi tiết cách thực hiện:</h1>
 <h2>1. Tiền xử lý dữ liệu:</h2>
@@ -24,5 +21,3 @@ feature TF-IDF, 5 gram, sử dụng thư viện SKlearn. Stopword xem ra không 
 Bằng cách train 2 lần: Lần 1 chia tập train/test theo tỉ lệ 7/3 và lần 2 train overfitting, mình phát hiện ra các trường hợp gán nhãn sai và gán lại nhãn, lặp đi lặp lại quá trình này vài chục lần mình đã gán nhãn lại được khá nhiều data. Cách làm của mình dựa trên ý tưởng của Overfitting, nếu đã dạy mô hình tập dữ liệu A rồi test trên chính tập A đó mà mô hình chỉ đạt độ chính xác thấp chứng tỏ dữ liệu chưa phổ quát, quá ít dữ liệu hoặc gán nhãn sai. VD: Train 7/3 đạt 89%, train overfit đạt chỉ 94% thì chứng tỏ có nhiều data gán nhãn sai. Mình gán lại nhãn  đến khi độ chính xác khi train overfit đạt khoảng 98% thì dừng lại, lúc này độ chính xác của train 7/3 đạt khoảng 94%. Việc gán lại nhãn, loại bỏ nhiễu với train data là một phần của data science và hoàn toàn hợp lệ. (Tất nhiên là không động chút nào đến test data).
 <h2>Kết quả</h2>
 Mình chạy Crossvalidation 5 folds để đánh giá model công bằng hơn. Kết quả cuối cùng CV5fold với <strong>tập dữ liệu đã gán lại nhãn</strong> là <strong>94.4%</strong>. Kết quả submit tại AIVIVN.COM của mình đạt <strong>89.57%</strong>. 
-<h2>CODE</h2>
-Mô hình của mình đặt tại <a href="https://github.com/swordmanager/sentiment_analysis_nal">Github</a>
